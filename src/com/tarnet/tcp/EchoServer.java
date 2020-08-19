@@ -1,6 +1,7 @@
 package com.tarnet.tcp;
 
 import lombok.SneakyThrows;
+import lombok.var;
 
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -14,20 +15,21 @@ public class EchoServer {
     public static void main(String[] args) {
         AsynchronousServerSocketChannel echoServer = AsynchronousServerSocketChannel.open();
         echoServer.bind(new InetSocketAddress("127.0.0.1", 81));
-        while(true) {
-            echoServer.accept(null, new CompletionHandler<AsynchronousSocketChannel, Object>() {
-                @Override
-                public void completed(AsynchronousSocketChannel result, Object attachment) {
-
-                }
-
-                @Override
-                public void failed(Throwable exc, Object attachment) {
-
-                }
-            });
-        }
-//        Run(myFuture);
+        Future<AsynchronousSocketChannel> f = echoServer.accept();
+        Run(f);
+//        while(true) {
+//            echoServer.accept(null, new CompletionHandler<AsynchronousSocketChannel, Object>() {
+//                @Override
+//                public void completed(AsynchronousSocketChannel result, Object attachment) {
+//
+//                }
+//
+//                @Override
+//                public void failed(Throwable exc, Object attachment) {
+//
+//                }
+//            });
+//        }
     }
 
     @SneakyThrows
