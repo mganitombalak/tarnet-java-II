@@ -2,39 +2,43 @@ package com.tarnet.tcp;
 
 import lombok.SneakyThrows;
 
+import java.io.BufferedReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.net.SocketAddress;
+import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class EchoClient {
-
-
     @SneakyThrows
     public static void main(String[] args) {
-        AsynchronousSocketChannel client = AsynchronousSocketChannel.open();
-        Future future = client.connect(new InetSocketAddress("localhost", 81));
-        future.get();
-        String result = sendMsg("deneme", client);
-        System.out.println(result);
-    }
+        AsynchronousSocketChannel clientSocketChannel= AsynchronousSocketChannel.open();
+        Future f = clientSocketChannel.connect(new InetSocketAddress("localhost",81));
+        // Run(f);
 
-
-
-
-    public static String sendMsg(String message, AsynchronousSocketChannel client) throws ExecutionException, InterruptedException {
-        byte[] byteMsg = new String(message).getBytes();
+        f.get();
+        String str= "Hello! How are you?";
         ByteBuffer buffer = ByteBuffer.allocate(1024);
-        Future<Integer> writeResult = client.write(buffer);
-        writeResult.get();
-        buffer.flip();
-        Future<Integer> readResult = client.read(buffer);
-        readResult.get();
-        String echo = new String(buffer.array()).trim();
+        buffer.put(str.getBytes());
+        Future<Integer> writeOperation = clientSocketChannel.write(buffer);
+        System.out.println("Writing to server: "+str);
+        writeOperation.get();
         buffer.clear();
-        buffer.get(byteMsg);
-        return echo;
+        Future<Integer> readOperation=clientSocketChannel.read(buffer);
+        readOperation.get();
+        buffer.flip();
+        byte[] stringData = new byte[buffer.limit()];
+        buffer.get(stringData);
+        System.out.println(new String("Server says:"+ new String(stringData)));
+        clientSocketChannel.close();
+//        buffer.flip();
+//        Future<Integer> readval = client.read(buffer);
+//        System.out.println("Received from server: "
+//                +new String(buffer.array()).trim());
+//        readval.get();
+//        buffer.clear();
     }
 }

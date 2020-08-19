@@ -1,13 +1,11 @@
-package com.tarnet.tcp;
+package com.tarnet.udp;
 
 import lombok.SneakyThrows;
-import lombok.var;
 
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
-import java.nio.channels.CompletionHandler;
 import java.util.concurrent.Future;
 
 public class EchoServer {
@@ -17,20 +15,6 @@ public class EchoServer {
         echoServer.bind(new InetSocketAddress("127.0.0.1", 81));
         Future<AsynchronousSocketChannel> f = echoServer.accept();
         Run(f);
-        echoServer.close();
-//        while(true) {
-//            echoServer.accept(null, new CompletionHandler<AsynchronousSocketChannel, Object>() {
-//                @Override
-//                public void completed(AsynchronousSocketChannel result, Object attachment) {
-//
-//                }
-//
-//                @Override
-//                public void failed(Throwable exc, Object attachment) {
-//
-//                }
-//            });
-//        }
     }
 
     @SneakyThrows
@@ -45,9 +29,9 @@ public class EchoServer {
             byteBuffer.flip();
             Future<Integer> writeOperation = socketChannel.write(byteBuffer);
             // OTHER OPERATIONS
+
             writeOperation.get();
             byteBuffer.clear();
         }
-//        socketChannel.close();
     }
 }
