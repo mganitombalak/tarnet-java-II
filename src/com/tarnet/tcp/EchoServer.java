@@ -9,45 +9,37 @@ import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 public class EchoServer {
     @SneakyThrows
     public static void main(String[] args) {
-        AsynchronousServerSocketChannel echoServer = AsynchronousServerSocketChannel.open();
+       try( AsynchronousServerSocketChannel echoServer = AsynchronousServerSocketChannel.open()){
         echoServer.bind(new InetSocketAddress("127.0.0.1", 81));
         Future<AsynchronousSocketChannel> f = echoServer.accept();
-        Run(f);
-        echoServer.close();
-//        while(true) {
-//            echoServer.accept(null, new CompletionHandler<AsynchronousSocketChannel, Object>() {
-//                @Override
-//                public void completed(AsynchronousSocketChannel result, Object attachment) {
-//
-//                }
-//
-//                @Override
-//                public void failed(Throwable exc, Object attachment) {
-//
-//                }
-//            });
-//        }
-    }
-
-    @SneakyThrows
-    public static void Run(Future<AsynchronousSocketChannel> channelFuture) {
-        AsynchronousSocketChannel socketChannel = channelFuture.get();
-
-        while (true) {
-            ByteBuffer byteBuffer = ByteBuffer.allocate(128);
-            Future<Integer> readOperation = socketChannel.read(byteBuffer);
-            // OTHER OPERATIONS
-            readOperation.get();
-            byteBuffer.flip();
-            Future<Integer> writeOperation = socketChannel.write(byteBuffer);
-            // OTHER OPERATIONS
-            writeOperation.get();
-            byteBuffer.clear();
+        AsynchronousSocketChannel client = f.get(10, TimeUnit.SECONDS);
+        if ((client != null) && (client.isOpen())) {
+            ByteBuffer buffer = ByteBuffer.allocate(1024);
+            Future<Integer> readval = client.read(buffer);
+            System.out.println("Received from client: "
+                    + new String(buffer.array()).trim());
+            readval.get();
+            buffer.flip();
+            String str = "I'm fine. Thank you!";
+            Future<Integer> writeVal = client.write(
+                    ByteBuffer.wrap(str.getBytes()));
+            System.out.println("Writing back to client: "
+                    + str);
+            writeVal.get();
+            buffer.clear();
         }
-//        socketChannel.close();
+        client.close();
+    } catch(Exception e)
+
+    {
+        e.printStackTrace();
     }
+
+}
+
 }
