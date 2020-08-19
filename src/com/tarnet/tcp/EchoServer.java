@@ -1,13 +1,11 @@
 package com.tarnet.tcp;
 
 import lombok.SneakyThrows;
-import lombok.var;
 
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
-import java.nio.channels.CompletionHandler;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
