@@ -1,7 +1,6 @@
 package com.tarnet.fi;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Calculator {
@@ -33,7 +32,7 @@ public class Calculator {
         List<String> letters = Arrays.asList("E", "r", "s", "i", "n", " ", "K", "i", "l", "i", "c");
 
         // BEGIN GANI
-        String result = letters.stream().reduce("", String::concat);
+//        String result = letters.stream().reduce("", String::concat);
 //        System.out.println(result);
         // END GANI
 
@@ -89,12 +88,71 @@ public class Calculator {
 //                .distinct()
 //                .collect(Collectors.toCollection(LinkedList::new));
 
-        Map<String,Integer> letterCount= fruits
-                .stream()
+//        Map<String,Integer> letterCount= fruits
+//                .stream()
+//                .filter(Objects::nonNull)
+//                .flatMap(Collection::stream)
+////                .distinct()
+//                .collect(Collectors.toMap(Function.identity(),String::length,(item,otheritem)->item));
+
+
+// Counting
+
+//        long result = fruits.stream().collect(Collectors.counting());
+
+// Average
+
+//        double result = fruits.stream().filter(Objects::nonNull).flatMap(Collection::stream).collect(Collectors.averagingDouble(String::length));
+
+// Summary
+
+//        DoubleSummaryStatistics result =fruits.stream().filter(Objects::nonNull).flatMap(Collection::stream).collect(Collectors.summarizingDouble(String::length));
+//
+//        System.out.println("Avarage:"+result.getAverage());
+//        System.out.println("Count:"+result.getCount());
+//        System.out.println("Max:"+result.getMax());
+//        System.out.println("Min:"+result.getMin());
+//        System.out.println("Sum:"+result.getSum());
+
+//        MAX / MIN
+
+//        Optional<String> minValue = fruits.stream()
+//                .filter(Objects::nonNull)
+//                .flatMap(Collection::stream)
+//                .collect(Collectors.minBy(Comparator.comparingInt(String::length)));
+//
+//        minValue.ifPresent(v-> System.out.println(v));
+//
+//        Optional<String> maxValue = fruits.stream()
+//                .filter(Objects::nonNull)
+//                .flatMap(Collection::stream)
+//                .collect(Collectors.maxBy(Comparator.comparingInt(String::length)));
+//
+//        maxValue.ifPresent(System.out::println);
+
+//        JOIN
+
+//        String result = fruits.stream().filter(Objects::nonNull).flatMap(Collection::stream).collect(Collectors.joining(",","FIRST->","<-LAST"));
+//
+//        System.out.println(result);
+
+
+//        GROUPBY
+
+        List<List<String>> words = Arrays.asList(
+                Arrays.asList("a", "aa"),
+                Arrays.asList("b", "bb", "bbb"),
+                Arrays.asList("c", "cc", "ccc", "cccc"),
+                Arrays.asList("d"),
+                Arrays.asList("e"),
+                null);
+
+
+        Map<Integer, List<String>> grouped = words.stream()
                 .filter(Objects::nonNull)
                 .flatMap(Collection::stream)
-//                .distinct()
-                .collect(Collectors.toMap(Function.identity(),String::length,(item,otheritem)->item));
+                .collect(Collectors.groupingBy(String::length));
+
 
         System.out.println("OK");
 
