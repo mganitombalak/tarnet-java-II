@@ -17,6 +17,7 @@ public class EchoServer {
         echoServer.bind(new InetSocketAddress("127.0.0.1", 81));
         Future<AsynchronousSocketChannel> f = echoServer.accept();
         Run(f);
+        echoServer.close();
 //        while(true) {
 //            echoServer.accept(null, new CompletionHandler<AsynchronousSocketChannel, Object>() {
 //                @Override
@@ -44,7 +45,6 @@ public class EchoServer {
             byteBuffer.flip();
             Future<Integer> writeOperation = socketChannel.write(byteBuffer);
             // OTHER OPERATIONS
-
             writeOperation.get();
             byteBuffer.clear();
         }
