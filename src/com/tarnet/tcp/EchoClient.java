@@ -32,7 +32,7 @@ public class EchoClient {
         buffer.flip();
         byte[] stringData = new byte[buffer.limit()];
         buffer.get(stringData);
-        System.out.println(new String("Server says:"+ stringData));
+        System.out.println(new String("Server says:"+ new String(stringData)));
         clientSocketChannel.close();
 //        buffer.flip();
 //        Future<Integer> readval = client.read(buffer);
