@@ -5,7 +5,9 @@ import com.github.javafaker.Faker;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentMap;
 import java.util.stream.IntStream;
+
 import static java.util.stream.Collectors.*;
 
 public class GPB {
@@ -45,10 +47,14 @@ public class GPB {
 //                .stream()
 //                .collect(groupingBy(Employee::getDepartment,groupingBy(Employee::getTitle,averagingDouble(Employee::getSalary))));
 
+        // GROUP BY DEPARTMENT THEN BY TITLE / TOTAL EMPLOYEE
+
+//        ConcurrentMap<Department, Map<Title, Long>> sumOfEmployeesByDepartmentThenByTitle = employeeList.parallelStream().collect(groupingByConcurrent(Employee::getDepartment, groupingBy(Employee::getTitle, counting())));
 
 
+        // PartitionBy
 
-
+        Map<Boolean, List<Employee>> employeesPartitionedBySalary = employeeList.stream().collect(partitioningBy(e -> e.getSalary() > 12000));
 
         System.out.println("OK");
     }
