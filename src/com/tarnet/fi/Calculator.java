@@ -1,8 +1,8 @@
 package com.tarnet.fi;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Calculator {
     public static void main(String[] args) {
@@ -57,13 +57,46 @@ public class Calculator {
 
         List<List<String>> fruits = Arrays.asList(
                 Arrays.asList("Apple", "Apricot"),
-                Arrays.asList("Banana","Strawberry", "Blueberry"),
+                Arrays.asList("Banana", "Strawberry", "Blueberry"),
                 Arrays.asList("Cherry", "Clementine"),
-                Arrays.asList("Orange","Banana"),
-                Arrays.asList("Strawberry"));
+                Arrays.asList("Orange", "Banana"),
+                Arrays.asList("Strawberry"),
+                null);
 
 //        fruits.stream().map(List::size).forEach(System.out::println);
 //        fruits.stream().flatMap(Collection::stream).forEach(System.out::println);
 // "Apple", "Apricot", "Banana", "Blueberry", "Cherry", "Clementine","Orange","Strawberry"
+
+//        fruits.stream().filter(Objects::nonNull).flatMap(Collection::stream).distinct().forEach(System.out::println);
+
+//        List<String> distictFruits = fruits
+//                .stream()
+//                .filter(Objects::nonNull)
+//                .flatMap(Collection::stream)
+//                .distinct()
+//                .collect(Collectors.toList());
+//        Set<String> distinctF = fruits
+//                .stream()
+//                .filter(Objects::nonNull)
+//                .flatMap(Collection::stream)
+//                .collect(Collectors.toSet());
+//        System.out.println(distinctF.size());
+
+//        List<String> distinctFruit=fruits
+//                .stream()
+//                .filter(Objects::nonNull)
+//                .flatMap(Collection::stream)
+//                .distinct()
+//                .collect(Collectors.toCollection(LinkedList::new));
+
+        Map<String,Integer> letterCount= fruits
+                .stream()
+                .filter(Objects::nonNull)
+                .flatMap(Collection::stream)
+//                .distinct()
+                .collect(Collectors.toMap(Function.identity(),String::length,(item,otheritem)->item));
+
+        System.out.println("OK");
+
     }
 }
