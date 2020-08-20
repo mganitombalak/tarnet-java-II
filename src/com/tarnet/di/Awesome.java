@@ -1,10 +1,11 @@
 package com.tarnet.di;
 
+import com.tarnet.annotation.Dependent;
 import lombok.Data;
 
 @Data
 public class Awesome {
-    @Dependent
+    @Dependent(klazz=ELKLogger.class)
     private ILogger logger;
 
     public Awesome(ILogger logger) {

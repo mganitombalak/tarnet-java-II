@@ -1,6 +1,7 @@
 package com.tarnet.di;
 
 
+import com.tarnet.annotation.Dependee;
 
 @Dependee(isDefault=true)
 public class TextLogger implements ILogger {

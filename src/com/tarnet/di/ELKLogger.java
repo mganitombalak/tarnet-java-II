@@ -1,6 +1,8 @@
 package com.tarnet.di;
 
 
+import com.tarnet.annotation.Dependee;
+
 @Dependee
 public class ELKLogger implements ILogger {
 
