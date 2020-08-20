@@ -8,7 +8,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.stream.IntStream;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,15 +25,19 @@ public class Main {
             public void run() {
                 producerExecutorService.execute(new Producer(queue));
             }
-        },0,1);
+        }, 0, 1);
 
 
-        var consumer = new Consumer(queue,consumerExecutorService,syncResults);
+        var consumer = new Consumer(queue, consumerExecutorService, syncResults);
         consumerExecutorService.execute(consumer);
 
 
-
-
-
+        var monitor = new Timer();
+        monitor.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.printf("Total:%s%n", syncResults.size());
+            }
+        }, 1000, 3000);
     }
 }
