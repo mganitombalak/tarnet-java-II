@@ -16,16 +16,18 @@ public class EchoClient {
     @SneakyThrows
     public static void main(String[] args) {
         AsynchronousSocketChannel clientSocketChannel= AsynchronousSocketChannel.open();
-        Future f = clientSocketChannel.connect(new InetSocketAddress("localhost",81));
+        Future f = clientSocketChannel.connect(new InetSocketAddress("127.0.0.1",81));
         // Run(f);
 
         f.get();
+
         String str= "Hello! How are you?";
-        ByteBuffer buffer = ByteBuffer.allocate(1024);
-        buffer.put(str.getBytes());
-        Future<Integer> writeOperation = clientSocketChannel.write(buffer);
+        ByteBuffer buffer = ByteBuffer.wrap(str.getBytes());
+//        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        Future<Integer> writeval = clientSocketChannel.write(buffer);
         System.out.println("Writing to server: "+str);
-        writeOperation.get();
+        writeval.get();
+
         buffer.clear();
         Future<Integer> readOperation=clientSocketChannel.read(buffer);
         readOperation.get();
@@ -34,11 +36,5 @@ public class EchoClient {
         buffer.get(stringData);
         System.out.println(new String("Server says:"+ new String(stringData)));
         clientSocketChannel.close();
-//        buffer.flip();
-//        Future<Integer> readval = client.read(buffer);
-//        System.out.println("Received from server: "
-//                +new String(buffer.array()).trim());
-//        readval.get();
-//        buffer.clear();
     }
 }
