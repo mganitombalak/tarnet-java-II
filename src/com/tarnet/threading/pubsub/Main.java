@@ -7,14 +7,14 @@ import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class Main {
     public static void main(String[] args) {
 
         var results = new ArrayList<Integer>();
         var syncResults = Collections.synchronizedList(results);
-        var queue = new LinkedBlockingQueue<Integer>(100);
+        var queue = new LinkedBlockingDeque<Integer>(5000);
 
         var consumerExecutorService = Executors.newFixedThreadPool(5);
         var producerExecutorService = Executors.newFixedThreadPool(10);
