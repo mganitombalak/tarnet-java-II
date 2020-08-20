@@ -1,28 +1,25 @@
 package com.tarnet.thread;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class Veri {
 
-        Queue<Integer> producerVeri = new LinkedList<>();
-        Queue<Integer> cosnumerVeri = new LinkedList();
+        Stack<Integer> producerVeri = new Stack<>();
+        Stack<Integer> cosnumerVeri = new Stack();
 
-        public Queue<Integer> getProducerVeri() {
+        public Stack<Integer> getProducerVeri() {
                 return producerVeri;
         }
 
-        public void setProducerVeri(Queue<Integer> producerVeri) {
+        public void setProducerVeri(Stack<Integer> producerVeri) {
                 this.producerVeri = producerVeri;
         }
 
-        public Queue<Integer> getCosnumerVeri() {
+        public Stack<Integer> getCosnumerVeri() {
                 return cosnumerVeri;
         }
 
-        public void setCosnumerVeri(Queue<Integer> cosnumerVeri) {
+        public void setCosnumerVeri(Stack<Integer> cosnumerVeri) {
                 this.cosnumerVeri = cosnumerVeri;
         }
 }

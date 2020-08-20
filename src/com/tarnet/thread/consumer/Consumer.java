@@ -41,7 +41,7 @@ public class Consumer implements Runnable {
 
     }
     public void consumeEt(){
-        veri.getCosnumerVeri().add(veri.getProducerVeri().poll()*2);
+        veri.getCosnumerVeri().add(veri.getProducerVeri().pop()*2);
     }
 
     public Veri getVeri() {
