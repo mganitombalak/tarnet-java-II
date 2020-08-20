@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.LongAdder;
 
 public class ForkJoinFileSizeCalculator {
     public static class FileSizeCalculatorTask extends RecursiveTask<Long> {
@@ -30,9 +31,9 @@ public class ForkJoinFileSizeCalculator {
                         tasks.add(fileTask);
                     });
                 }
-                AtomicLong totalSize = new AtomicLong(0);
-                tasks.forEach(t -> totalSize.addAndGet(t.join()));
-                return  totalSize.get();
+                LongAdder totalSize = new LongAdder();
+                tasks.forEach(t -> totalSize.add(t.join()));
+                return  totalSize.sum();
             }
         }
     }
