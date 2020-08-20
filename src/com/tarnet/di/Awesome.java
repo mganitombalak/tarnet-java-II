@@ -1,9 +1,10 @@
 package com.tarnet.di;
 
-public class Awesome {
+import lombok.Data;
 
-    // @Autowired
-    // @Qualifer("ELKLogger")
+@Data
+public class Awesome {
+    @Dependent
     private ILogger logger;
 
     public Awesome(ILogger logger) {

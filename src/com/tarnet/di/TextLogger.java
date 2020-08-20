@@ -1,7 +1,8 @@
 package com.tarnet.di;
 
 
-//@Component  / @Service / @Repository / @Bean / @Controller
+
+@Dependee(isDefault=true)
 public class TextLogger implements ILogger {
     @Override
     public void log(String msg) {
