@@ -1,0 +1,8 @@
+Recursive functionlarda JVM native Tail Optimization desteklemiyor.
+Recursive Func -> StackOverFlow dikkat ederiz.
+
+Scala -> Recursive Func Tail Optimization
+
+
+1. Tail Optimization nedir?
+2. Tail Optimization nasil yapilir?
