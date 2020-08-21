@@ -2,7 +2,7 @@ package com.tarnet.di;
 
 
 
-@Dependee(isDefault=true)
+@Dependee(isDefault = true)
 public class TextLogger implements ILogger {
     @Override
     public void log(String msg) {

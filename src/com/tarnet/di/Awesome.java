@@ -4,9 +4,10 @@ import lombok.Data;
 
 @Data
 public class Awesome {
-    @Dependent
+//    @Dependent
     private ILogger logger;
 
+//    @Dependent
     public Awesome(ILogger logger) {
         this.logger = logger;
     }

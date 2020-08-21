@@ -5,7 +5,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME) // SOURCE COMPILE EDILMEZ  CLASS METADATA YAZILIR AMA JVM OKUMAZ RUNTIME HERTURLU ERISILIR
+@Target(ElementType.METHOD) // Java 9 MODULE
 public @interface TarimKredi {
 }
