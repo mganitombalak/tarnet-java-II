@@ -3,8 +3,12 @@ package com.tarnet.i18n;
 // internationalization i18n
 // localization         l10n
 
+import sun.util.BuddhistCalendar;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.chrono.ThaiBuddhistChronology;
+import java.time.chrono.ThaiBuddhistDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
@@ -107,6 +111,11 @@ public class Main {
 
         SimpleDateFormat simpleFormatter = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss.SSSS");
         System.out.println(simpleFormatter.format(selectedDate));
+
+
+        // Sample
+        ThaiBuddhistDate buddhistDate = ThaiBuddhistDate.now();
+        System.out.println(buddhistDate);
 
     }
 }
