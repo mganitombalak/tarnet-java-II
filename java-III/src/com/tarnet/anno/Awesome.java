@@ -23,4 +23,18 @@ public class Awesome {
     public void setVeryImportantField(int veryImportantField) {
         VeryImportantField = veryImportantField;
     }
+
+    @ConditionalInvoke(order = 1)
+    public void f1(){
+
+    }
+
+    @ConditionalInvoke(order = 2)
+    public void f2(){
+
+    }
+    @ConditionalInvoke(value = true)
+    public void f3(){
+
+    }
 }
