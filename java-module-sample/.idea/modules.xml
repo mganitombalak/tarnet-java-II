@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/com.tarnet.client/com.tarnet.client.iml" filepath="$PROJECT_DIR$/com.tarnet.client/com.tarnet.client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.tarnet.common/com.tarnet.common.iml" filepath="$PROJECT_DIR$/com.tarnet.common/com.tarnet.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.tarnet.services/com.tarnet.services.iml" filepath="$PROJECT_DIR$/com.tarnet.services/com.tarnet.services.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.tarnet.zava/com.tarnet.zava.iml" filepath="$PROJECT_DIR$/com.tarnet.zava/com.tarnet.zava.iml" />
       <module fileurl="file://$PROJECT_DIR$/java-module-sample.iml" filepath="$PROJECT_DIR$/java-module-sample.iml" />
     </modules>
   </component>
