@@ -61,6 +61,6 @@ public class Main {
         System.out.println(f2.firstName + " is eligible :" + f2.IsEligibleForCredit + " for limit " + f2.creditLimit);
 
 
-        TarnetRule<IRule>  tr= (r)->r.Execute();
+//        TarnetRule<IRule>  tr= (r)->r.Execute();
     }
 }
