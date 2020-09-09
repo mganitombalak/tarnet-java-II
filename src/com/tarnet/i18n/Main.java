@@ -10,10 +10,7 @@ import java.text.SimpleDateFormat;
 import java.time.chrono.ThaiBuddhistChronology;
 import java.time.chrono.ThaiBuddhistDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -81,9 +78,9 @@ public class Main {
 //            System.out.printf("%s%n", ct);
 //        });
 
-        GregorianCalendar today = new GregorianCalendar(2020, Calendar.AUGUST, 21);
-        GregorianCalendar zaferBayrami = new GregorianCalendar(2020, Calendar.JUNE, 30);
-        today.add(GregorianCalendar.DATE, 1);
+//        GregorianCalendar today = new GregorianCalendar(2020, Calendar.AUGUST, 21);
+//        GregorianCalendar zaferBayrami = new GregorianCalendar(2020, Calendar.JUNE, 30);
+//        today.add(GregorianCalendar.DATE, 1);
 //        gregorianCalendar.add(Calendar.MONTH,1);
 //        System.out.printf("%s%n", today.getTime());
 //        System.out.println("Today<Zafer Bayrami:" + today.compareTo(zaferBayrami));
@@ -91,7 +88,7 @@ public class Main {
 //        System.out.println(today.toZonedDateTime().format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
 //        System.out.println("Agustos contains " + today.getActualMaximum(Calendar.DAY_OF_MONTH) + " days.");
 
-        GregorianCalendar myCalendar = new GregorianCalendar(2020, Calendar.FEBRUARY, 21);
+//        GregorianCalendar myCalendar = new GregorianCalendar(2020, Calendar.FEBRUARY, 21);
 
 //        System.out.println("Feb contains " + myCalendar.getActualMaximum(Calendar.DAY_OF_MONTH) + " days.");
 //
@@ -101,21 +98,34 @@ public class Main {
 
 //        System.out.println("2020 is lean year?:" + myCalendar.isLeapYear(2020));
 
-        Date selectedDate = myCalendar.getTime();
+//        Date selectedDate = myCalendar.getTime();
+//
+//        DateFormat fullDateFormatter = DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL, Locale.FRANCE);
+//        System.out.println(fullDateFormatter.format(selectedDate));
+//
+//        DateFormat shortDateFormatter = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.MEDIUM, Locale.ITALY);
+//        System.out.println(shortDateFormatter.format(selectedDate));
+//
+//        SimpleDateFormat simpleFormatter = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss.SSSS");
+//        System.out.println(simpleFormatter.format(selectedDate));
+//
+//
+//        // Sample
+//        ThaiBuddhistDate buddhistDate = ThaiBuddhistDate.now();
+//        System.out.println(buddhistDate);
 
-        DateFormat fullDateFormatter = DateFormat.getDateTimeInstance(DateFormat.FULL,DateFormat.FULL, Locale.FRANCE);
-        System.out.println(fullDateFormatter.format(selectedDate));
-
-        DateFormat shortDateFormatter = DateFormat.getDateTimeInstance(DateFormat.SHORT,DateFormat.MEDIUM, Locale.ITALY);
-        System.out.println(shortDateFormatter.format(selectedDate));
-
-        SimpleDateFormat simpleFormatter = new SimpleDateFormat("dd MMMM yyyy HH:mm:ss.SSSS");
-        System.out.println(simpleFormatter.format(selectedDate));
+        Locale locale = new Locale("tr","TR");
+        ResourceBundle resources = ResourceBundle.getBundle("com.tarnet.i18n.strings",locale);
+        System.out.println(resources.getString("value"));
+//        Arrays.stream((String[])resources.getObject("myArray")).forEach(System.out::println);
 
 
-        // Sample
-        ThaiBuddhistDate buddhistDate = ThaiBuddhistDate.now();
-        System.out.println(buddhistDate);
-
+        locale = new Locale("tr","TR");
+        ResourceBundle classResources = ResourceBundle.getBundle("com.tarnet.i18n.MyResource",locale);
+        System.out.println(classResources.getString("price") + " " + classResources.getString("currency"));
+        locale = new Locale("en","US");
+        classResources = ResourceBundle.getBundle("com.tarnet.i18n.MyResource",locale);
+        System.out.println(classResources.getString("price") + " " + classResources.getString("currency"));
+        resources.keySet().stream().forEach(System.out::println);
     }
 }
